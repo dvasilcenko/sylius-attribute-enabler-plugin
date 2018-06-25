@@ -1,0 +1,10 @@
+Dvasilcenko\SyliusAttributeEnablerPlugin\Entity\ProductAttribute:
+    type: entity
+    table: sylius_product_attribute
+    fields:
+        displayableInShop:
+            type: boolean
+            nullable: true
+            column: displayable_in_shop
+            options:
+                default: true

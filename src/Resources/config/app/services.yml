@@ -1,0 +1,5 @@
+services:
+    app.form.extension.type.product_attribute:
+        class: Dvasilcenko\SyliusAttributeEnablerPlugin\Form\Extension\ProductAttributeTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType }

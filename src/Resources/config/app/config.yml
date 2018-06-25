@@ -1,0 +1,6 @@
+sylius_attribute:
+    resources:
+        product:
+            attribute:
+                classes:
+                    model: Dvasilcenko\SyliusAttributeEnablerPlugin\Entity\ProductAttribute

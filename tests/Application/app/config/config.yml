@@ -1,0 +1,82 @@
+parameters:
+    locale: en
+    secret: "Heron is the best animal in the world!"
+
+imports:
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
+
+    - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }
+
+    - { resource: parameters.yml }
+
+    - { resource: "@DvasilcenkoSyliusAttributeEnablerPlugin/Resources/config/app/config.yml" }
+    - { resource: "@DvasilcenkoSyliusAttributeEnablerPlugin/Resources/config/app/services.yml" }
+
+framework:
+    translator: { fallbacks: ["%locale%"] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.project_dir%/app/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form: true
+    csrf_protection: true
+    validation: { enable_annotations: true }
+    templating: { engines: ["twig"] }
+    default_locale: "%locale%"
+    session:
+        storage_id: session.storage.mock_file
+    test: ~
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        firephp:
+            type: firephp
+            level: info
+
+swiftmailer:
+    disable_delivery: true
+    logging: true
+    spool:
+        type: file
+        path: "%kernel.cache_dir%/spool"
+
+doctrine:
+    dbal:
+        driver: '%database_driver%'
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        server_version: '5.5'
+        charset: UTF8
+
+fos_rest:
+    exception: ~
+    view:
+        formats:
+            json: true
+            xml:  true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
+
+sylius_theme:
+    sources:
+        test: ~
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/web"
+                cache_prefix: "media/cache"
