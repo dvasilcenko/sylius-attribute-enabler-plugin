@@ -51,3 +51,5 @@ Clear cache:
 ```bash
 bin/console cache:clear
 ```
+
+To see form label translations refresh administrators language
