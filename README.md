@@ -31,6 +31,11 @@ $bundles = [
 ];
 ```
 
+Update the database schema
+```
+bin/console doctrine:schema:update --force
+```
+
 Copy templates from
 
 ```
